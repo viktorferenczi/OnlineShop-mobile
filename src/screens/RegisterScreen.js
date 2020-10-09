@@ -11,6 +11,7 @@ import {
     TouchableWithoutFeedback
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import {StatusBar} from "expo-status-bar";
 
 
 
@@ -29,10 +30,8 @@ export const RegisterScreen = ({ navigation }) => {
     const onSubmit = data => {
         console.log(data);
 
-
-        // post request with proper validation in normal case. ex: axios.post("/user/create")
-        //in this test project i will use asyncStorage
-       // AsyncStorage.setItem("user", JSON.stringify({ email: data.email, password: data.password }));
+        navigation.navigate("Products");
+       //request
     }
 
 
@@ -40,6 +39,27 @@ export const RegisterScreen = ({ navigation }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView behavior={Platform.OS == "ios" || "android" ? "padding" : "height"}  style={styles.container}>
             <View>
+                <StatusBar style="dark" />
+                <Text style={styles.label}>Name</Text>
+                <Controller
+                    control={control}
+                    render={({ onChange, onBlur, value }) => (
+                        <TextInput
+                            style={styles.input}
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            autoCapitalize="none"
+                            placeholder="Enter your name..."
+                        />
+                    )}
+                    rules={{ required: true }}
+                    name="name"
+                    defaultValue=""
+                />
+                {errors.name && errors.name.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Name is required.</Text>}
+
+
                 <Text style={styles.label}>Email</Text>
                 <Controller
                     control={control}
@@ -85,7 +105,7 @@ export const RegisterScreen = ({ navigation }) => {
                 {errors.password && errors.password.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Password is required.</Text>}
 
                 <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-                    <Text>Submit</Text>
+                    <Text>Sign up</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -102,7 +122,6 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 40,
         height: 48,
-
         borderRadius: 43,
         backgroundColor: "gray",
         alignItems: "center",
@@ -123,5 +142,5 @@ const styles = StyleSheet.create({
         marginLeft:20,
         marginRight:20
     }
-})
+});
 

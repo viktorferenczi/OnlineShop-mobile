@@ -16,6 +16,9 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
 
+//middleware
+import auth from "../../middlewares/auth";
+
 export const LoginScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
@@ -86,12 +89,15 @@ export const LoginScreen = ({ navigation }) => {
                 <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
                     <Text>Sign in</Text>
                 </TouchableOpacity>
-                <View style={styles.register}>
+                <View style={styles.buttonText}>
                     <Button title="Not a user yet? Register here" onPress={ () => navigation.navigate('Register') }/>
                 </View>
-                <View style={styles.register}>
+                <View style={styles.buttonText}>
                     <Button title="Continue" onPress={ () => navigation.navigate('Products') }/>
                 </View>
+                {auth() === false &&   <View style={styles.buttonText}>
+                    <Button title="auth test" onPress={ () => navigation.navigate('Products') }/>
+                </View>}
             </View>
 
                 </KeyboardAvoidingView>
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: "cover",
     },
-    register: {
+    buttonText: {
         marginTop: 20,
         height: 40,
         alignItems: "center",

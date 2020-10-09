@@ -33,6 +33,7 @@ export const ProductItemScreen = ({ route, navigation }) => {
                 onPress={addToCartHandler}
                >
                 <Image
+                    style={styles.image}
                     source={{ uri: 'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png' }}
                 />
             </TouchableOpacity>
@@ -41,35 +42,13 @@ export const ProductItemScreen = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    label: {
-        color: "black",
-        margin: 10,
-        marginLeft:30,
-    },
-    button: {
-        marginTop: 40,
-        height: 48,
-        borderRadius: 43,
-        backgroundColor: "gray",
-        alignItems: "center",
-        justifyContent: "center",
-
-    },
     container: {
         flex: 1,
-        justifyContent: "center",
-        padding: 8,
         backgroundColor: "lightgrey"
     },
-    input: {
-        backgroundColor: "white",
-        borderColor: 'white',
+    image: {
+        width: 40,
         height: 40,
-        padding:10,
-        borderRadius: 60,
-        marginLeft:20,
-        marginRight:20
-    }
+    },
 });
-
 

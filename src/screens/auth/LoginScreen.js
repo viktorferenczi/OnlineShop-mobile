@@ -18,6 +18,7 @@ import {StatusBar} from "expo-status-bar";
 
 //middleware
 import auth from "../../middlewares/auth";
+import authenticated from "../../middlewares/auth";
 
 export const LoginScreen = ({ navigation }) => {
 
@@ -95,7 +96,7 @@ export const LoginScreen = ({ navigation }) => {
                 <View style={styles.buttonText}>
                     <Button title="Continue" onPress={ () => navigation.navigate('Products') }/>
                 </View>
-                {auth() === false &&   <View style={styles.buttonText}>
+                {authenticated() === false &&   <View style={styles.buttonText}>
                     <Button title="auth test" onPress={ () => navigation.navigate('Products') }/>
                 </View>}
             </View>

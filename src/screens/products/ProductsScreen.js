@@ -14,8 +14,10 @@ import FlatListItem from "../../components/products/FlatListItem";
 export const ProductsScreen = ({ navigation }) => {
 
     const [Loading, setLoading] = useState(true);
-    const [ProductList, setProductList] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
+
+    const [ProductList, setProductList] = useState([]);
+
 
     useEffect(  () => {
         /*Axios.get("")
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         width: 60,
         height: 60,
-        borderRadius:29,
+        borderRadius:44,
         backgroundColor: "lightblue",
     },
     WelcomeText:{

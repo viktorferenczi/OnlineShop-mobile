@@ -6,11 +6,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import { HomeScreen } from '../screens/HomeScreen';
-import { RegisterScreen } from "../screens/RegisterScreen";
-import { ProductsScreen } from "../screens/ProductsScreen";
-import { LoginScreen } from "../screens/LoginScreen";
-import { CartScreen } from "../screens/CartScreen";
-import { ProductItemScreen } from "../screens/ProductItemScreen";
+import { RegisterScreen } from "../screens/auth/RegisterScreen";
+import { ProductsScreen } from "../screens/products/ProductsScreen";
+import { LoginScreen } from "../screens/auth/LoginScreen";
+import { CartScreen } from "../screens/userCart/CartScreen";
+import { ProductItemScreen } from "../screens/products/ProductItemScreen";
 
 
 
@@ -41,9 +41,21 @@ export default function Navigator() {
                     />
 
                     <Stack.Screen
-                        name="Profile"
-                        component={ProfileScreen}
-                        options={{ title: 'Your Profile' }}
+                        name="Product"
+                        component={ProductItemScreen}
+                        options={{ title: 'View Product' }}
+                    />
+
+                    <Stack.Screen
+                        name="ProductsScreen"
+                        component={ProductsScreen}
+                        options={{ title: 'Products' }}
+                    />
+
+                    <Stack.Screen
+                        name="Cart"
+                        component={CartScreen}
+                        options={{ title: 'Your Cart' }}
                     />
 
                 </Stack.Navigator>

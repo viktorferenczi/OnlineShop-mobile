@@ -15,6 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 
 
 
+
 export const RegisterScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
@@ -27,6 +28,7 @@ export const RegisterScreen = ({ navigation }) => {
 
     const onSubmit = data => {
         console.log(data);
+
 
         // post request with proper validation in normal case. ex: axios.post("/user/create")
         //in this test project i will use asyncStorage

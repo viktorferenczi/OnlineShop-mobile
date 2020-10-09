@@ -33,7 +33,7 @@ export const HomeScreen = ({ navigation }) => {
                 {
                     authenticated ?
                         <View>
-                            <Button title="View Profile" onPress={ () => navigation.navigate('Profile')}/>
+                            <Button title="My Cart" onPress={ () => navigation.navigate('Cart')}/>
                         </View>
                 :
                         <View>
@@ -41,6 +41,7 @@ export const HomeScreen = ({ navigation }) => {
                             <Button title="Login" onPress={ () => navigation.navigate('Login')}/>
                         </View>
                 }
+                <Button title="Products" onPress={ () => navigation.navigate('Products')} />
             </SafeAreaView>
     );
 }

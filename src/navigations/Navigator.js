@@ -10,7 +10,7 @@ import { RegisterScreen } from "../screens/RegisterScreen";
 import { ProductsScreen } from "../screens/ProductsScreen";
 import { LoginScreen } from "../screens/LoginScreen";
 import { CartScreen } from "../screens/CartScreen";
-import { ProductItemScreen } from "../screens/CartScreen";
+import { ProductItemScreen } from "../screens/ProductItemScreen";
 
 
 

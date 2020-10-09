@@ -40,6 +40,7 @@ export const RegisterScreen = ({ navigation }) => {
         <KeyboardAvoidingView behavior={Platform.OS == "ios" || "android" ? "padding" : "height"}  style={styles.container}>
             <View>
                 <StatusBar style="dark" />
+
                 <Text style={styles.label}>Name</Text>
                 <Controller
                     control={control}
@@ -96,12 +97,10 @@ export const RegisterScreen = ({ navigation }) => {
                             placeholder="Password"
                         />
                     )}
-                    rules={{ required: true, min: 5, max: 50 }}
+                    rules={{ required: true }}
                     name="password"
                     defaultValue=""
                 />
-                {errors.password && errors.password.type === "min" && <Text style={{ color:"red", marginLeft:30 }}>Password must be min 3 char.</Text>}
-                {errors.password && errors.password.type === "max" && <Text style={{ color:"red", marginLeft:30 }}>Password must be max 50 char.</Text>}
                 {errors.password && errors.password.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Password is required.</Text>}
 
                 <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
@@ -132,6 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         padding: 8,
+        backgroundColor: "lightgrey"
     },
     input: {
         backgroundColor: "white",

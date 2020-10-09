@@ -10,7 +10,8 @@ import {
     Keyboard,
     TouchableWithoutFeedback,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    ImageBackground
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
@@ -18,6 +19,8 @@ import {StatusBar} from "expo-status-bar";
 export const LoginScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
+
+    const image = { uri: "https://reactjs.org/logo-og.png" };
 
     const email = value => {
         let emailPattern = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -33,7 +36,8 @@ export const LoginScreen = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" || "android" ? "padding" : "height"}  style={styles.container}>
             <StatusBar style="dark" />
             <Text style={styles.label}>Email</Text>
             <Controller
@@ -90,8 +94,7 @@ export const LoginScreen = ({ navigation }) => {
                 </View>
             </View>
 
-
-
+                </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
@@ -110,6 +113,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+    },
     register: {
         marginTop: 20,
         height: 40,
@@ -120,6 +127,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         padding: 8,
+        backgroundColor: "lightgrey"
     },
     input: {
         backgroundColor: "white",

@@ -5,13 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import { RegisterScreen } from "../screens/RegisterScreen";
-import {LoginScreen} from "../screens/LoginScreen";
+import { RegisterScreen } from "../screens/auth/RegisterScreen";
+import {LoginScreen} from "../screens/auth/LoginScreen";
 
-import { ProductsScreen } from "../screens/ProductsScreen";
-import { ProductItemScreen } from "../screens/ProductItemScreen";
+import { ProductsScreen } from "../screens/products/ProductsScreen";
+import { ProductItemScreen } from "../screens/products/ProductItemScreen";
 
-import { CartScreen } from "../screens/CartScreen";
+import { CartScreen } from "../screens/userCart/CartScreen";
 
 
 

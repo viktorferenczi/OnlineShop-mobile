@@ -8,14 +8,27 @@ import Axios from "axios";
 export default class FlatListItem extends Component {
     constructor(props) {
         super(props);
+        this.handleViewItem = this.handleViewItem.bind(this);
     }
 
+    handleViewItem(){
+        /*this.props.navigation.navigate("Product",
+            {
+                id:this.props.item.id,
+                name:this.props.item.name,
+                price:this.props.item.price,
+                image:this.props.item.image,
+            });
+            */
+        console.log(this.props.item.name);
+    }
 
     render() {
         function imageClickHandle(){
             //bigger image logic
             console.log("bigger image");
         }
+
         const swipeSettings = {
             autoClose:true,
             right:[
@@ -33,6 +46,10 @@ export default class FlatListItem extends Component {
 
         return (
             <Swipeout {...swipeSettings}>
+                <TouchableOpacity
+                    activeOpacity={2}
+                    onPress={this.handleViewItem}
+                >
                 <Card containerStyle={{width: "100%", margin: 0, borderBottomColor: "black", height: 160}}>
 
                     <Card.Title>{this.props.item.name}</Card.Title>
@@ -49,6 +66,7 @@ export default class FlatListItem extends Component {
                     </TouchableOpacity>
                     <Text>Price:{this.props.item.price}${"\n"}</Text>
                 </Card>
+            </TouchableOpacity>
             </Swipeout>
         );
     }

@@ -21,6 +21,7 @@
     "react-native-form-validator": "^0.3.2",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
+    "react-native-numeric-input": "^1.8.3",
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.12"
   },

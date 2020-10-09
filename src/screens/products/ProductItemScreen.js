@@ -5,7 +5,9 @@ import ProductItem from "../../components/product/ProductItem";
 import NumericInput from 'react-native-numeric-input';
 
 
-export const ProductItemScreen = ({ navigation }) => {
+export const ProductItemScreen = ({ route, navigation }) => {
+
+    const product = route.params;
 
    function addToCartHandler(){
         //add to cart
@@ -15,11 +17,12 @@ export const ProductItemScreen = ({ navigation }) => {
     return (
         <SafeAreaView>
             <StatusBar style="dark" />
+
             <ProductItem
-            id={this.props.item.id}
-            name={this.props.item.name}
-            price={this.props.item.price}
-            image={this.props.item.image}
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.image}
             />
 
             <NumericInput onChange={value => console.log(value)} />

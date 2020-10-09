@@ -12,15 +12,15 @@ export default class FlatListItem extends Component {
     }
 
     handleViewItem(){
-        /*this.props.navigation.navigate("Product",
+        this.props.navigation.navigate("Product",
             {
                 id:this.props.item.id,
                 name:this.props.item.name,
                 price:this.props.item.price,
                 image:this.props.item.image,
             });
-            */
-        console.log(this.props.item.name);
+
+
     }
 
     render() {

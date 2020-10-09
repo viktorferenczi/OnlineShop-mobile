@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import Axios from "axios";
 
 
-export default class FlatListItem extends Component {
+export default class ProductItem extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,10 +12,10 @@ export default class FlatListItem extends Component {
     render() {
         return (
          <SafeAreaView>
-             <Text>{this.props.item.name}</Text>
+             <Text>{this.props.name}</Text>
                 <Image
                     source={{ uri: 'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png' }}/>
-                    <Text>Price:{this.props.item.price}$</Text>
+                    <Text>Price:{this.props.price}$</Text>
             </SafeAreaView>
         );
     }

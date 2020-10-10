@@ -33,7 +33,7 @@ export const LoginScreen = ({ navigation }) => {
     const onSubmit = data => {
         console.log(data);
         navigation.navigate("Products");
-
+        AsyncStorage.removeItem("redirected");
         // request
     }
 
@@ -93,7 +93,7 @@ export const LoginScreen = ({ navigation }) => {
                     <Button title="Not a user yet? Register here" onPress={ () => navigation.navigate('Register') }/>
                 </View>
 
-                {redirected()  &&  <View style={styles.buttonText}>
+                {redirected() === true  &&  <View style={styles.buttonText}>
                     <Button title="Continue" onPress={ () => navigation.navigate('Products') }/>
                 </View>}
             </View>

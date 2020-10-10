@@ -44,7 +44,7 @@ export const ProductsScreen = ({ navigation }) => {
     //cart icon onclick
     const cartClickHandler = () => {
         //navigate to cart
-        if(authenticated()) {
+        if(authenticated() === true) {
             navigation.navigate("Cart");
         } else {
             AsyncStorage.setItem("redirected", JSON.stringify(true)); //store that we are being redirected

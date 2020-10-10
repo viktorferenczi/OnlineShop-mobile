@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {AsyncStorage, FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+    AsyncStorage,
+    FlatList,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    TextInput,
+    KeyboardAvoidingView
+} from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import FlatListItem from "../../components/cart/FlatListItem";
 
@@ -36,37 +46,50 @@ export const CartScreen = ({ navigation }) => {
     function getTotalAmount() {
         let totalAmount = 0;
 
-        for (const product in ProductList) {
-            totalAmount += product.price;
+        for (let i = 0; i < ProductList.length; i++) {
+            console.log("product: " + ProductList[i].name)
+            totalAmount += ProductList[i].price * ProductList[i].quantity;
         }
         return totalAmount;
     }
 
     return (
-        <SafeAreaView>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" || "android" ? "padding" : "height"} style={{ flex:1}}>
             <StatusBar style="dark" />
             {
                 ProductList.length === 0
                 ? <Text style={styles.errorMessage}>{errorMessage}</Text>
                 : <View>
-                    <FlatList
-                        showsVerticalScrollIndicator={false}
-                        data={ProductList}
-                        renderItem={({item}) =>
-                            <FlatListItem
-                                item={item}
-                                navigation={navigation}/>}
-                    />
-                    <View style={styles.horizontalLine}/>
-                    <View>
-                    <Text>TAX:</Text>
-                    <Text>COUPON CODE:</Text>
-                    <Text>Total Amount: {getTotalAmount()}$</Text>
+                    <View style={{ marginBottom:390 }}>
+                        <FlatList
+                            showsVerticalScrollIndicator={true}
+                            data={ProductList}
+                            renderItem={({item}) =>
+                                <FlatListItem
+                                    item={item}
+                                    navigation={navigation}/>}
+                        />
+                        <View style={{marginBottom:10}}>
+                            <View style={styles.horizontalLine}/>
+                            <View>
+                                <Text>TAX:</Text>
+                                <Text>COUPON CODE:</Text>
+                                <Text>Total Amount: {getTotalAmount()}$</Text>
+                            </View>
+                            <Text>Address</Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={(value) => console.log("test")}
+                                autoCapitalize="none"
+                                placeholder="Enter your address..."
+
+                            />
+                            <Button title="Purchase" onPress={ () => console.log("Purchase") }/>
+                        </View>
                     </View>
                   </View>
             }
-
-        </SafeAreaView>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -81,4 +104,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingBottom: 30,
     },
+    container: {
+        flex:1
+    },
+    input: {
+        backgroundColor: "white",
+        borderColor: 'black',
+        height: 40,
+        padding:10,
+        borderRadius: 10,
+    }
 });

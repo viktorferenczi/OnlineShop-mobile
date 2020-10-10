@@ -60,8 +60,8 @@ export const ProductItemScreen = ({ route, navigation }) => {
 
                 await AsyncStorage.setItem("userCart", JSON.stringify(cart)); //push the item to cart
             }
+            navigation.navigate("Products");
         }
-        console.log(JSON.parse(await AsyncStorage.getItem("userCart")));
     }
 
     return (

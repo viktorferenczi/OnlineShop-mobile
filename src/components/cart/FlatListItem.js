@@ -13,7 +13,7 @@ export default class FlatListItem extends Component {
 
         return (
             <SafeAreaView>
-                <Card containerStyle={{width: "40%",}}>
+                <Card containerStyle={styles.container}>
                     <Card.Title>{this.props.item.name}</Card.Title>
                     <Card.Divider/>
                     <Image
@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     ProductImageStyle: {
         width: 50,
         height: 50,
+    },
+    container: {
+        width: "60%",
+        marginLeft: "20%",
+
     }
 });
 

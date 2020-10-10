@@ -16,7 +16,7 @@ export default class ProductItem extends Component {
              <View style={styles.imageView}>
                  <Image
                  style={styles.image}
-                 source={{ uri: 'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png' }}/>
+                 source={{ uri: this.props.image }}/>
              </View>
                     <Text style={styles.price}>Price:{this.props.price}$</Text>
              <View style={styles.horizontalLine}/>
@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
     image: {
         width: 100,
         height: 100,
+        borderColor: "black",
+        borderWidth: 1
     },
     imageView : {
         marginLeft: "2%",

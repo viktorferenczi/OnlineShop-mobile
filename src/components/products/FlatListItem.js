@@ -1,8 +1,10 @@
 import {Card} from "react-native-elements";
-import {Image, StyleSheet, Text, TouchableOpacity} from "react-native";
+import {AsyncStorage, Image, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
 import Swipeout from 'react-native-swipeout';
 import React, {Component} from "react";
 import Axios from "axios";
+import insert from "../../actions/insertIntoCart";
+
 
 
 export default class FlatListItem extends Component {
@@ -35,8 +37,16 @@ export default class FlatListItem extends Component {
                 {
                     backgroundColor:"green",
                     text: 'Add to cart',
-                    onPress: () => {
-                        console.log("add to cart pressed:" +this.props.item.name);
+                    onPress: async () => {
+                        let itemFound = false;
+                        let product = {
+                            id:this.props.item.id,
+                            name:this.props.item.name,
+                            image:this.props.item.image,
+                            price:this.props.item.price
+                        }
+                        await insert(itemFound, product, 1); //add to cart
+                        Alert.alert(product.name + " was successfully added to your cart. For large amount of purchase, please tap on the item.")
                     }
                 }
             ],
@@ -59,7 +69,7 @@ export default class FlatListItem extends Component {
                         style={styles.TouchableOpacityStyle}>
                         <Image
                             style={styles.ProductImageStyle}
-                            source={{ uri: 'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png' }}
+                            source={{ uri: this.props.item.image }}
                         />
                     </TouchableOpacity>
                     <Text>Price:{this.props.item.price}${"\n"}</Text>

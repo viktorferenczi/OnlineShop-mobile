@@ -8,7 +8,8 @@ import {
     View,
     Button,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Alert
 } from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import FlatListItem from "../../components/cart/FlatListItem";
@@ -25,7 +26,6 @@ export const CartScreen = ({ navigation }) => {
             try {
                 let productJsonList = [];
                 let listOfProducts = JSON.parse(await AsyncStorage.getItem("userCart"));//get the cart
-
 
                 for (let i= 0; i< listOfProducts.length; i++) {
                     let product = JSON.parse(listOfProducts[i]);
@@ -51,6 +51,12 @@ export const CartScreen = ({ navigation }) => {
             totalAmount += ProductList[i].price * ProductList[i].quantity;
         }
         return totalAmount;
+    }
+
+    async function handlePurchase(){
+        Alert.alert("Purchase complete");
+        await AsyncStorage.setItem("userCart", JSON.stringify([""])); // empty the cart
+        navigation.navigate("Products");
     }
 
     return (
@@ -82,9 +88,8 @@ export const CartScreen = ({ navigation }) => {
                                 onChangeText={(value) => console.log("test")}
                                 autoCapitalize="none"
                                 placeholder="Enter your address..."
-
                             />
-                            <Button title="Purchase" onPress={ () => console.log("Purchase") }/>
+                            <Button title="Purchase" onPress={handlePurchase}/>
                         </View>
                     </View>
                   </View>

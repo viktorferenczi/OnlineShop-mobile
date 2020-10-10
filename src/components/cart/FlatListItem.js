@@ -18,7 +18,7 @@ export default class FlatListItem extends Component {
                     <Card.Divider/>
                     <Image
                         style={styles.ProductImageStyle}
-                        source={{ uri: 'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png' }}
+                        source={{ uri: this.props.item.image }}
                     />
                     <Text>Price:{this.props.item.price}${"\n"}</Text>
                     <Text>Quantity: {this.props.item.quantity}</Text>

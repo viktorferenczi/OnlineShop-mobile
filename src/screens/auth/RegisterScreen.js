@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Text,
     View,
@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
+import axios from "axios";
 
 
 
@@ -20,6 +21,7 @@ import {StatusBar} from "expo-status-bar";
 export const RegisterScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
+    const [errorMessage, setErrorMessage] = useState("");
 
     const email = value => {
         let emailPattern = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -27,11 +29,30 @@ export const RegisterScreen = ({ navigation }) => {
     }
 
 
-    const onSubmit = data => {
-        console.log(data);
 
-        navigation.navigate("Products");
-       //request
+    const onSubmit = data => {
+        let status;
+        console.log(data);
+        axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/register",data)
+            .then(function(response){
+                console.log(response.status)
+                if(response.status === 201){
+                    setErrorMessage("");
+
+                    //automatic login logic
+
+                    navigation.navigate("Products");
+
+                }
+            })
+            .catch(function (error){
+                console.log(error.response.status);
+                if(error.response && error.response.status === 409){
+                    setErrorMessage("Email already exists!");
+                } else if(error.request){
+                    setErrorMessage("Oops! Looks like no response was received! Try again later.");
+                }
+            });
     }
 
 
@@ -40,8 +61,8 @@ export const RegisterScreen = ({ navigation }) => {
         <KeyboardAvoidingView behavior={Platform.OS == "ios" || "android" ? "padding" : "height"}  style={styles.container}>
             <View>
                 <StatusBar style="dark" />
-
-                <Text style={styles.label}>Name</Text>
+                {errorMessage !== "" && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+                <Text style={styles.label}>Name*</Text>
                 <Controller
                     control={control}
                     render={({ onChange, onBlur, value }) => (
@@ -61,7 +82,7 @@ export const RegisterScreen = ({ navigation }) => {
                 {errors.name && errors.name.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Name is required.</Text>}
 
 
-                <Text style={styles.label}>Email</Text>
+                <Text style={styles.label}>Email*</Text>
                 <Controller
                     control={control}
                     render={({ onChange, onBlur, value }) => (
@@ -83,7 +104,7 @@ export const RegisterScreen = ({ navigation }) => {
                 {errors.email && errors.email.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Email is required.</Text>}
 
 
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.label}>Password*</Text>
                 <Controller
                     control={control}
                     render={({ onChange, onBlur, value }) => (
@@ -102,6 +123,24 @@ export const RegisterScreen = ({ navigation }) => {
                     defaultValue=""
                 />
                 {errors.password && errors.password.type === "required" && <Text style={{ color:"red", marginLeft:30 }}>Password is required.</Text>}
+
+
+                <Text style={styles.label}>Address</Text>
+                <Controller
+                    control={control}
+                    render={({ onChange, onBlur, value }) => (
+                        <TextInput
+                            style={styles.input}
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            autoCapitalize="none"
+                            placeholder="Enter your address...(optional)"
+                        />
+                    )}
+                    name="address"
+                    defaultValue=""
+                />
 
                 <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
                     <Text>Sign up</Text>
@@ -125,7 +164,6 @@ const styles = StyleSheet.create({
         backgroundColor: "gray",
         alignItems: "center",
         justifyContent: "center",
-
     },
     container: {
         flex: 1,
@@ -141,6 +179,11 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         marginLeft:20,
         marginRight:20
+    },
+    errorMessage: {
+        color:"red",
+        margin: 10,
+        marginLeft:30,
     }
 });
 

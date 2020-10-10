@@ -20,29 +20,21 @@ export const ProductsScreen = ({ navigation }) => {
 
 
     useEffect(  () => {
-        /*Axios.get("")
+        Axios.get("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/products")
             .then(response => {
                 setProductList(response.data);
                 setLoading(false);
-            }); */
-        setProductList([
-            {id: 1,name:"Kifli",price:200,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            {id: 2,name:"tej",price:300,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            {id: 3,name:"kola",price:500,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            {id: 4,name:"füles",price:200,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            {id: 5,name:"telefon",price:900,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            {id: 6,name:"sajt",price:100,image:'https://cdn0.iconfinder.com/data/icons/webshop-essentials/100/shopping-cart-512.png'},
-            ]);
+            });
         setLoading(false);
     },[]);
 
     //refresh
     const onRefresh = React.useCallback(async () => {
         setRefreshing(true);
-        /*Axios.get("")
+        Axios.get("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/products")
             .then(response => {
                 setProductList(response.data);
-            });*/
+            });
         setRefreshing(false);
     }, [refreshing]);
 
@@ -93,7 +85,6 @@ export const ProductsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "lightgrey"
     },
     TouchableOpacityStyle: {
         position: 'absolute',

@@ -73,9 +73,12 @@ export const ProductItemScreen = ({ route, navigation }) => {
             price={product.price}
             image={product.image}
             />
+            <Text>Please enter the amount of {product.name} you want to buy.</Text>
 
-            <NumericInput onChange={ value => handleOrderCount(value) } />
-            {errorText !== "" && <Text style={styles.errorText}>{errorText}</Text>}
+            <View style={styles.input}>
+                <NumericInput onChange={ value => handleOrderCount(value) } />
+                {errorText !== "" && <Text style={styles.errorText}>{errorText}</Text>}
+            </View>
 
             <Text>Shop now!</Text>
             <TouchableOpacity
@@ -102,6 +105,10 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: "red"
+    },
+    input : {
+        marginTop: 30,
+        paddingBottom: 42,
     }
 });
 

@@ -35,14 +35,12 @@ export const RegisterScreen = ({ navigation }) => {
         console.log(data);
         axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/register",data)
             .then(function(response){
-                console.log(response.status)
                 if(response.status === 201){
                     setErrorMessage("");
 
                     //automatic login logic
-
+                    AsyncStorage.setItem("@app:session", response.data.api_key); // set token for the user
                     navigation.navigate("Products");
-
                 }
             })
             .catch(function (error){

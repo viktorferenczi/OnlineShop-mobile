@@ -95,13 +95,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "lightgrey"
     },
-    titleText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        alignSelf: "center",
-        marginBottom: -30,
-        marginTop: 5
-    },
     TouchableOpacityStyle: {
         position: 'absolute',
         width: 75,
@@ -117,20 +110,6 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius:44,
         backgroundColor: "lightblue",
-    },
-    WelcomeText:{
-        textAlign:"center",
-        fontSize:25,
-        marginTop: 20,
-        marginBottom:30
-    },
-    HomeText:{
-        textAlign:"center",
-        fontSize:20,
-    },
-    VersionText:{
-        paddingTop:"100%",
-        textAlign: "left"
     }
 });
 

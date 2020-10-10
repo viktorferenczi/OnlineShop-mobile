@@ -35,11 +35,9 @@ export default class FlatListItem extends Component {
                 {
                     backgroundColor:"green",
                     text: 'Add to cart',
-                    /*onPress: () => {
-                        Axios.delete(
-                            "" + this.props.item.id
-                        ).then(this.props.refresh);
-                    }*/
+                    onPress: () => {
+                        console.log("add to cart pressed:" +this.props.item.name);
+                    }
                 }
             ],
         }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import {
-    ActivityIndicator,
+    ActivityIndicator, AsyncStorage,
     FlatList, Image,
     RefreshControl,
     SafeAreaView,
@@ -10,6 +10,9 @@ import {
     View
 } from "react-native";
 import FlatListItem from "../../components/products/FlatListItem";
+
+//middleware
+import {authenticated} from "../../middlewares/auth";
 
 export const ProductsScreen = ({ navigation }) => {
 
@@ -25,7 +28,6 @@ export const ProductsScreen = ({ navigation }) => {
                 setProductList(response.data);
                 setLoading(false);
             });
-        setLoading(false);
     },[]);
 
     //refresh
@@ -42,17 +44,31 @@ export const ProductsScreen = ({ navigation }) => {
     //cart icon onclick
     const cartClickHandler = () => {
         //navigate to cart
-        navigation.navigate("Cart");
+        if(authenticated()) {
+            navigation.navigate("Cart");
+        } else {
+            AsyncStorage.setItem("redirected", JSON.stringify(true)); //store that we are being redirected
+            navigation.navigate("Login");
+        }
+
     }
 
     const flatListRef = React.useRef(); //flatlist refresh
+
+    if(Loading) {
+        return (
+            <View style={{flex:1,justifyContent: 'center',alignItems: 'center'}}>
+                <StatusBar style="dark" />
+                <ActivityIndicator size="large" />
+            </View>
+        );
+    }
 
     return (
         <SafeAreaView style={styles.container}>
 
             <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#ffffff" translucent = {true}/>
 
-            {Loading ? <ActivityIndicator  style={{height:200}} /> : <View style={{borderBottomColor: "black"}}/>}
 
             {ProductList != null && (
                 <FlatList

@@ -17,8 +17,7 @@ import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
 
 //middleware
-import auth from "../../middlewares/auth";
-import authenticated from "../../middlewares/auth";
+import { redirected } from "../../middlewares/auth";
 
 export const LoginScreen = ({ navigation }) => {
 
@@ -93,11 +92,9 @@ export const LoginScreen = ({ navigation }) => {
                 <View style={styles.buttonText}>
                     <Button title="Not a user yet? Register here" onPress={ () => navigation.navigate('Register') }/>
                 </View>
-                <View style={styles.buttonText}>
+
+                {redirected()  &&  <View style={styles.buttonText}>
                     <Button title="Continue" onPress={ () => navigation.navigate('Products') }/>
-                </View>
-                {authenticated() === false &&   <View style={styles.buttonText}>
-                    <Button title="auth test" onPress={ () => navigation.navigate('Products') }/>
                 </View>}
             </View>
 

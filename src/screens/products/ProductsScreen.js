@@ -43,14 +43,14 @@ export const ProductsScreen = ({ navigation }) => {
 
     //cart icon onclick
     const cartClickHandler = () => {
-        //navigate to cart
-        if(authenticated() === true) {
-            navigation.navigate("Cart");
-        } else {
-            AsyncStorage.setItem("redirected", JSON.stringify(true)); //store that we are being redirected
-            navigation.navigate("Login");
-        }
-
+        authenticated().then( function(result){
+            if(result === true) {
+                navigation.navigate("Cart");
+            } else {
+                navigation.navigate("Login");
+                AsyncStorage.setItem("redirected","true");
+            }
+        });
     }
 
     const flatListRef = React.useRef(); //flatlist refresh

@@ -13,12 +13,15 @@ import {
 } from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import FlatListItem from "../../components/cart/FlatListItem";
+import axios from 'axios';
+import {getResponderNode} from "react-native-web/dist/hooks/useResponderEvents/ResponderSystem";
 
 
 export const CartScreen = ({ navigation }) => {
 
     const [ProductList, setProductList] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    const [address, setAddress] = useState("");
 
 
     useEffect( () => {
@@ -31,15 +34,18 @@ export const CartScreen = ({ navigation }) => {
                     let product = JSON.parse(listOfProducts[i]);
                     productJsonList.push(product);
                 }
-
                 setProductList(productJsonList);
+
+                const token = JSON.parse(await AsyncStorage.getItem('@app:session')); // get the user token
+
+                axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/user",
+                    {api_key:token})
+                    .then(response => {setAddress(response.data.user.address)} ) //get the user's address
             } catch (e) {
                 setErrorMessage("You have no items in your cart :(");
             }
         }
-
-        getCart();
-        console.log(ProductList.length === 0);
+        getCart(); // get the user's cart stored locally
     },[]);
 
 
@@ -56,6 +62,12 @@ export const CartScreen = ({ navigation }) => {
     async function handlePurchase(){
         Alert.alert("Purchase complete");
         await AsyncStorage.setItem("userCart", JSON.stringify([""])); // empty the cart
+        let token = JSON.parse(await AsyncStorage.getItem('@app:session'));
+        await axios.post(
+            `http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/user/update/address`,
+            {address: address})
+            .then(response => console.log(response)) //send an address update
+
         navigation.navigate("Products");
     }
 
@@ -85,9 +97,10 @@ export const CartScreen = ({ navigation }) => {
                             <Text>Address</Text>
                             <TextInput
                                 style={styles.input}
-                                onChangeText={(value) => console.log("test")}
+                                onChangeText={(value) => setAddress(value)}
                                 autoCapitalize="none"
                                 placeholder="Enter your address..."
+                                value={address}
                             />
                             <Button title="Purchase" onPress={handlePurchase}/>
                         </View>

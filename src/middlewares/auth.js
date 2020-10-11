@@ -2,12 +2,19 @@ import React from 'react';
 import {AsyncStorage} from 'react-native';
 
 export async function authenticated() {
-    const auth = await AsyncStorage.getItem('@app:session');
-    return auth != null;
+    let auth = JSON.parse(await AsyncStorage.getItem('@app:session'));
+    if (auth !== null) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export  async function redirected(){
-    console.log("ridajekt")
-    const redirect = await AsyncStorage.getItem("redirected");
-    return redirect != null;
+    let redirected = JSON.parse(await AsyncStorage.getItem('redirected'));
+    if (redirected !== null) {
+        return true;
+    } else {
+        return false;
+    }
 }

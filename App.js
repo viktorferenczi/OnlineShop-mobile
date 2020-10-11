@@ -5,8 +5,9 @@ import { AsyncStorage }  from 'react-native';
 
 export default function App() {
 
+  // AsyncStorage.clear();
+
   // Create a local storage cart for the user if not exists
-  //AsyncStorage.clear()
   try {
     const cart = JSON.parse(AsyncStorage.getItem("userCart"));
   } catch (error){

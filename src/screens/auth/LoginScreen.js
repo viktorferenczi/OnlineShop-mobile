@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Text,
     View,
@@ -17,13 +17,15 @@ import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
 
 //middleware
-import { redirected } from "../../middlewares/auth";
+import {authenticated} from "../../middlewares/auth";
+import axios from "axios";
 
 export const LoginScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const image = { uri: "https://reactjs.org/logo-og.png" };
+
 
     const email = value => {
         let emailPattern = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -32,9 +34,24 @@ export const LoginScreen = ({ navigation }) => {
 
     const onSubmit = data => {
         console.log(data);
-        navigation.navigate("Products");
-        AsyncStorage.removeItem("redirected");
-        // request
+        axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/login",data)
+            .then(function(response){
+                console.log(response);
+                if(response.status === 200){
+                    setErrorMessage("");
+
+                    AsyncStorage.setItem("@app:session", JSON.stringify({"api":response.data.api_key}));  // set token for the user
+                    navigation.navigate("Products");
+                }
+            })
+            .catch(function (error){
+                console.log(error.response.status);
+                if(error.response && error.response.status === 401){
+                    setErrorMessage("Email or password is not correct!");
+                } else if(error.request){
+                    setErrorMessage("Oops! Looks like no response was received! Try again later.");
+                }
+            });
     }
 
 
@@ -42,6 +59,9 @@ export const LoginScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" || "android" ? "padding" : "height"}  style={styles.container}>
             <StatusBar style="dark" />
+
+                {errorMessage !== "" && <Text style={styles.error}>{errorMessage}</Text>}
+
             <Text style={styles.label}>Email</Text>
             <Controller
                 control={control}
@@ -93,9 +113,9 @@ export const LoginScreen = ({ navigation }) => {
                     <Button title="Not a user yet? Register here" onPress={ () => navigation.navigate('Register') }/>
                 </View>
 
-                {redirected() === true  &&  <View style={styles.buttonText}>
+                <View style={styles.buttonText}>
                     <Button title="Continue" onPress={ () => navigation.navigate('Products') }/>
-                </View>}
+                </View>
             </View>
 
                 </KeyboardAvoidingView>
@@ -141,5 +161,10 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         marginLeft:20,
         marginRight:20
+    },
+    error: {
+        color:"red",
+        margin: 10,
+        marginLeft:30,
     }
 });

@@ -50,7 +50,7 @@ Used technologies for this project:
 * [Lumen] - Lightning fast API development.
 * [MySQL] - Oracles awesome database.
 * [Postman] - Every back-end developers favorite front-end.
-* [AWS] - reliable, scalable, and inexpensive cloud computing services. 
+* [AWS] - Reliable, scalable, and inexpensive cloud computing services. 
 
 ## Routes & functionality
 |Entity|Type|Route|Description|Success|Failure|

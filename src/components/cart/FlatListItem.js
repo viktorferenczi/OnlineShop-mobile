@@ -1,16 +1,13 @@
 import {Card} from "react-native-elements";
-import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity} from "react-native";
+import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
 import React, {Component} from "react";
-
 
 export default class FlatListItem extends Component {
     constructor(props) {
         super(props);
     }
 
-
     render() {
-
         return (
             <SafeAreaView>
                 <Card containerStyle={styles.container}>
@@ -36,7 +33,6 @@ const styles = StyleSheet.create({
     container: {
         width: "60%",
         marginLeft: "20%",
-
     }
 });
 

@@ -1,10 +1,8 @@
 import {Card} from "react-native-elements";
-import {AsyncStorage, Image, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, Alert} from "react-native";
 import Swipeout from 'react-native-swipeout';
 import React, {Component} from "react";
-import Axios from "axios";
 import insert from "../../actions/insertIntoCart";
-
 
 
 export default class FlatListItem extends Component {
@@ -21,8 +19,6 @@ export default class FlatListItem extends Component {
                 price:this.props.item.price,
                 image:this.props.item.image,
             });
-
-
     }
 
     render() {
@@ -59,10 +55,8 @@ export default class FlatListItem extends Component {
                     onPress={this.handleViewItem}
                 >
                 <Card containerStyle={{width: "100%", margin: 0, borderBottomColor: "black", height: 160}}>
-
                     <Card.Title>{this.props.item.name}</Card.Title>
                     <Card.Divider/>
-
                     <TouchableOpacity
                         activeOpacity={3}
                         onPress={imageClickHandle}

@@ -18,7 +18,6 @@ export const ProductsScreen = ({ navigation }) => {
 
     const [Loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
-
     const [ProductList, setProductList] = useState([]);
 
 
@@ -66,9 +65,7 @@ export const ProductsScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-
             <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#ffffff" translucent = {true}/>
-
 
             {ProductList != null && (
                 <FlatList

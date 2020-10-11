@@ -34,8 +34,6 @@ export default async function insert(itemFound,product,orderCount) {
             // remove the empty item from our list (localstorage cart creation. App.js line:13
             cart = cart.slice(1);
         }
-
         await AsyncStorage.setItem("userCart", JSON.stringify(cart)); //push the item to cart
     }
-
 }

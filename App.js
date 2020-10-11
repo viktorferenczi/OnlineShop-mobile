@@ -5,7 +5,7 @@ import { AsyncStorage }  from 'react-native';
 
 export default function App() {
 
-  // AsyncStorage.clear();
+  // AsyncStorage.clear(); clear the local storage on the phone -- testing purposes
 
   // Create a local storage cart for the user if not exists
   try {

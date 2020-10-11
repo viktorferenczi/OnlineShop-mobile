@@ -7,25 +7,17 @@ import {
     AsyncStorage,
     KeyboardAvoidingView,
     TouchableOpacity,
-    Keyboard,
-    TouchableWithoutFeedback,
     Button,
     SafeAreaView,
-    ImageBackground
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import {StatusBar} from "expo-status-bar";
-
-//middleware
-import {authenticated} from "../../middlewares/auth";
 import axios from "axios";
 
 export const LoginScreen = ({ navigation }) => {
 
-    const { control, handleSubmit, errors, getValues } = useForm();
+    const { control, handleSubmit, errors} = useForm();
     const [errorMessage, setErrorMessage] = useState("");
-
-
 
     const email = value => {
         let emailPattern = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
@@ -39,8 +31,7 @@ export const LoginScreen = ({ navigation }) => {
                 console.log(response);
                 if(response.status === 200){
                     setErrorMessage("");
-
-                    AsyncStorage.setItem("@app:session", JSON.stringify({"api":response.data.api_key}));  // set token for the user
+                    AsyncStorage.setItem("@app:session", JSON.stringify({"api":response.data.api_key}));// set token for the user
                     navigation.navigate("Products");
                 }
             })
@@ -53,7 +44,6 @@ export const LoginScreen = ({ navigation }) => {
                 }
             });
     }
-
 
     return (
         <SafeAreaView style={styles.container}>

@@ -1,13 +1,10 @@
-import {Image, StyleSheet, Text, TouchableOpacity, SafeAreaView, View} from "react-native";
+import {Image, StyleSheet, Text, SafeAreaView, View} from "react-native";
 import React, {Component} from "react";
-import Axios from "axios";
-
 
 export default class ProductItem extends Component {
     constructor(props) {
         super(props);
     }
-
 
     render() {
         return (
@@ -38,7 +35,6 @@ const styles = StyleSheet.create({
     name: {
         marginTop: "5%",
         marginLeft: "45%",
-
     },
     price: {
         paddingTop:22,

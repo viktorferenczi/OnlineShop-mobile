@@ -15,9 +15,6 @@ import {StatusBar} from "expo-status-bar";
 import axios from "axios";
 
 
-
-
-
 export const RegisterScreen = ({ navigation }) => {
 
     const { control, handleSubmit, errors, getValues } = useForm();
@@ -28,18 +25,13 @@ export const RegisterScreen = ({ navigation }) => {
         return value.length >= 3 && emailPattern.test(value) ;
     }
 
-
-
     const onSubmit = data => {
-        let status;
         console.log(data);
         axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/register",data)
             .then(function(response){
                 console.log(response.status)
                 if(response.status === 201){
                     setErrorMessage("");
-
-                    //automatic login logic
                     AsyncStorage.setItem("@app:session", JSON.stringify({"api":response.data.api_key})); // set token for the user
                     navigation.navigate("Products");
                 }
@@ -53,7 +45,6 @@ export const RegisterScreen = ({ navigation }) => {
                 }
             });
     }
-
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

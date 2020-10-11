@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
     AsyncStorage,
     FlatList,
-    SafeAreaView,
     StyleSheet,
     Text,
     View,
@@ -14,7 +13,6 @@ import {
 import {StatusBar} from 'expo-status-bar';
 import FlatListItem from "../../components/cart/FlatListItem";
 import axios from 'axios';
-import {getResponderNode} from "react-native-web/dist/hooks/useResponderEvents/ResponderSystem";
 
 
 export const CartScreen = ({ navigation }) => {
@@ -34,8 +32,8 @@ export const CartScreen = ({ navigation }) => {
                     let product = JSON.parse(listOfProducts[i]);
                     productJsonList.push(product);
                 }
-                setProductList(productJsonList);
 
+                setProductList(productJsonList);
                 const token = JSON.parse(await AsyncStorage.getItem('@app:session')); // get the user token
 
                 axios.post("http://authrestapi-env.eba-ithgd8xd.us-east-2.elasticbeanstalk.com/api/user",

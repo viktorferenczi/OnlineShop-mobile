@@ -7,7 +7,7 @@
 
 # Tech
 - [React Native] :  Create native apps for Android and iOS.
-- [Github] : Obviously.
+- [Github] : Versioncontrol.
 - [WebStorm] : Lightning fast IDE by Jetbrains.
 - [Expo] : Open-source platform for making universal native app
 
@@ -50,7 +50,7 @@ Used technologies for this project:
 * [Lumen] - Lightning fast API development.
 * [MySQL] - Oracles awesome database.
 * [Postman] - Every back-end developers favorite front-end.
-* [Github] - duh.
+* [AWS] - reliable, scalable, and inexpensive cloud computing services. 
 
 ## Routes & functionality
 |Entity|Type|Route|Description|Success|Failure|
@@ -99,3 +99,4 @@ Created by Ferenczi Károly Viktor, Free to use, free to modify, free to share.
    [Php]: <https://www.php.net/>
    [PHP storm]: <https://www.jetbrains.com/phpstorm/>
    [Lumen]: <https://lumen.laravel.com/>
+   [AWS]: <https://aws.amazon.com/>

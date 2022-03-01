@@ -1,5 +1,5 @@
 
-# React-native-webshop
+# React-native-shop
 
 - Easy to understand and use design.
 - Fast and lightweight implementation.
